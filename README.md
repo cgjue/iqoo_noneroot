@@ -1,4 +1,4 @@
-+# iqoo_noneroot
+# iqoo_noneroot
 免root优化iqoo
 
 ### 前提

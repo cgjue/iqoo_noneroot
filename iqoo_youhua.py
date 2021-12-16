@@ -1,14 +1,16 @@
 import os
 print("bak app")
-cmd = "adb shell pm list packages| sed 's/package://g' > iqoo.packages"
+cmd = "adb shell pm list packages -f> iqoo.packages"
 os.system(cmd)
 with open("iqoo.packages", "r") as f:
     for item in f.readlines():
-        it = item.strip()
-        package = it.split(r'/')[-1] + '.apk'
+        it = item.strip().split('package:')[1].split('=')
+        path = it[0]
+        package = it[1] + '.apk'
         if os.path.isfile(package):
             continue
-        cmd = "adb pull $(adb shell pm path %s | sed 's/package://g') %s" %(it, package)
+        path 
+        cmd = "adb pull %s %s" %(path, package)
         print(cmd)
         os.system(cmd)
 
@@ -42,7 +44,6 @@ uninstall_lst = ["com.tencent.qqlive",
 "com.bbk.cloud",
 "com.achievo.vipshop",
 "com.vivo.minigamecenter",
-"com.android.storagemanager",
 "com.android.filemanager",
 "com.vivo.wallet",
 "com.vivo.Tips",
@@ -53,9 +54,9 @@ uninstall_lst = ["com.tencent.qqlive",
 "com.baidu.map.location",
 "com.vivo.space",
 "com.bbk.appstore",
-"com.vivo.upslide",
 "com.vivo.agent",
 "com.wuba",
+"com.vivo.health",
 "com.sina.weibo"]
 
 for item in uninstall_lst:
